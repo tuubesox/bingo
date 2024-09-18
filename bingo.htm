@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<!--
+    BINGO
+    Type in the letters from your puzzle in the appropriate areas and hit UPDATE.
+    This code will give you possible 5-letter words which match your criteria.
+
+    Written by  : tuubesox
+    Pathname    : https://tuubesox.github.io/wordle_solver/wordle_solver.htm
+    Created     : 09/15/2024
+    Last Update : 09/15/2024
+-->
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bingo</title>
+
+    <style type="text/css">
+      * {
+          color: black;
+          font-family: arial;
+          font-size: 100%;
+      }
+      #header {
+          text-align: center;
+          background-color: #b80000;
+          line-height: 1.0;
+          padding: 30px;
+          margin: -10px;
+      }
+      h1 {
+          color: white;
+          text-align: left;
+          background-color: #b80000;
+          line-height: 1.0;
+      }
+      #h1-greater {
+          font-size: 180%;
+      }
+      #h1-lesser {
+          color: white;
+          font-size: 50%;
+      }
+      h2 {
+          color: #b80000;
+          font-size: 120%;
+          text-align: center;
+          text-decoration: underline;
+      }
+      p, .cb {
+          font-size: 100%;
+      }
+      #p01 {
+          font-size: 24pt;
+          color: fuchsia;
+      }
+      #cent {
+          text-align: center;
+      }
+      pb {
+          color: black;
+          font-size: 100%;
+          font-weight: bold;
+      }
+      input {
+          color: blue;
+          font-size: 100%;
+          font-weight: bold;
+          font-family: monospace;
+      }
+      .square {
+          background: #e5e5e5;
+          height: 60px;
+          width:  60px;
+          max-height: 120vw;
+          font-size: 10pt;
+          border: 1px solid black;
+          text-align: center;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-overflow: ellipsis;    // does not seem to work
+          overflow-wrap: break-word;  // does not seem to work
+      }
+
+    </style>
+
+</head>
+
+<!-- BODY Starts Here -->
+
+<body>
+
+<div id="header" style="vertical-align: text-top">
+    <table style="width:50%" align="center">
+        <tr>
+            <td>
+                <!-- I used an image converter at:  https://onlineimagetools.com/convert-image-to-base64  -->
+                <!-- <img src="https://s0.wp.com/wp-content/themes/pub/notesil/i/logo.gif" style="vertical-align:top" alt="icon" class="blog-icon" />  -->
+                <img src="data:image/gif;base64,R0lGODlhMgAyAHAAACwAAAAAMgAyAIH///8AAADDw8MAAAACoISPqcvtD6OctM6As9bW7p91FQiKFPmZF8qpEdu6DxzKMx3YN607eN5j/IJCHHExPCaSyqZCAI1KpYAh8zDNRqvGq0Gr5fK8AHBWDEOznmaq1Zhou7twhHz75sXvAjXKT8J2B1hCxteXl7Y3mLi2KEeYYsgXuVEZg0XZ+OfUeUB2BEokGkTaY6qDaqMqw+riqgJrIitC22HrUee5y9vbUQAAOw==" style="vertical-align:top" alt="icon" class="blog-icon" />
+            </td>
+            <td>
+                <h1 id="h1-greater">Bingo<br>
+                <span id="h1-lesser">Click on items when they occur</span></h1>
+            </td>
+        </tr>
+    </table>
+</div><!--  #header -->
+
+
+<div id="container" style="padding-left:25%">
+
+<!-- **************************************************************************
+               ***  HERE IS WHERE IT GETS INTERESTING  ***
+     ************************************************************************** -->
+
+<p></p>
+
+<form>
+  <p>
+    <table>
+      <tr>
+        <!-- Russian Hoax -->
+        <td> <div class='square' id="squareColor0" onclick="colorChoose(0)">  </div> </td>
+        <td> <div class='square' id="squareColor1" onclick="colorChoose(1)">  </div> </td>
+        <td> <div class='square' id="squareColor2" onclick="colorChoose(2)">  </div> </td>
+        <td> <div class='square' id="squareColor3" onclick="colorChoose(3)">  </div> </td>
+        <td> <div class='square' id="squareColor4" onclick="colorChoose(4)">  </div> </td>
+      </tr>
+      <tr>
+        <td> <div class='square' id="squareColor5" onclick="colorChoose(5)">  </div> </td>
+        <td> <div class='square' id="squareColor6" onclick="colorChoose(6)">  </div> </td>
+        <td> <div class='square' id="squareColor7" onclick="colorChoose(7)">  </div> </td>
+        <td> <div class='square' id="squareColor8" onclick="colorChoose(8)">  </div> </td>
+        <td> <div class='square' id="squareColor9" onclick="colorChoose(9)">  </div> </td>
+      </tr>
+      <tr>
+        <td> <div class='square' id="squareColor10" onclick="colorChoose(10)">  </div> </td>
+        <td> <div class='square' id="squareColor11" onclick="colorChoose(11)">  </div> </td>
+        <td> <div class='square' id="squareColor12" onclick="colorChoose(12)">  </div> </td>
+        <td> <div class='square' id="squareColor13" onclick="colorChoose(13)">  </div> </td>
+        <td> <div class='square' id="squareColor14" onclick="colorChoose(14)">  </div> </td>
+      </tr>
+      <tr>
+        <td> <div class='square' id="squareColor15" onclick="colorChoose(15)">  </div> </td>
+        <td> <div class='square' id="squareColor16" onclick="colorChoose(16)">  </div> </td>
+        <td> <div class='square' id="squareColor17" onclick="colorChoose(17)">  </div> </td>
+        <td> <div class='square' id="squareColor18" onclick="colorChoose(18)">  </div> </td>
+        <td> <div class='square' id="squareColor19" onclick="colorChoose(19)">  </div> </td>
+      </tr>
+      <tr>
+        <td> <div class='square' id="squareColor20" onclick="colorChoose(20)">  </div> </td>
+        <td> <div class='square' id="squareColor21" onclick="colorChoose(21)">  </div> </td>
+        <td> <div class='square' id="squareColor22" onclick="colorChoose(22)">  </div> </td>
+        <td> <div class='square' id="squareColor23" onclick="colorChoose(23)">  </div> </td>
+        <td> <div class='square' id="squareColor24" onclick="colorChoose(24)">  </div> </td>
+      </tr>
+    </table>
+    <br><br>
+  </p>
+</form>
+<p></p>
+<p></p>
+
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+
+<!-- Update the Value  -->
+
+<p></p>
+
+<!--
+<p> Entries Value: <a id="my_entries" style="color:red;"> none </a> </p>
+<p> Word Values:   <a id="my_words"   style="color:red;"> none </a> </p>
+<p></p>
+-->
+
+<p></p>
+<p></p>
+<script>
+
+var debateList = [ "World War III", "Some say the best ever", "Crowd size", "Project 2025",
+     "Election Denial", "Twice Impeached", "Insurrection", "Putin's Puppet", "Hunter Biden",
+     "I'm Speaking", "Not Going Back", "FREE", "Weird", "Sleepy Joe", "Eye Roll", "Border Czar",
+     "Childless Cat Lady", "Convicted Felon", "Kamala mispronounced", "Radical Left",
+     "Witch Hunt", "Shrinking Middle Class", "Ultra MAGA", "Stolen Election" ]
+
+
+var bachList = [ "Absolutely", "Here for wrong reasons", "My person", "Not here to make friends", 
+     "Disrespect", "Fantasy Suites", "Home-towns", "I'm here for ...", 
+     "Injury on group date", "It's the final rose tonight", "Can I steal you away?",
+     "One-on-one date", "FREE", "I want the best for ...", "Chemistry", "Bags taken away",
+     "Vulner-able", "Kiss", "Will you accept this rose?", "Cham-pagne toast", "My future (spouse)",
+     "Bug/animal disruption", "Crying", "Seated at dinner with no food", "Love journey" ]
+
+// Like, 
+
+var itemList = [ "Has Injury", "Gets Covid", "'Fantastic'", "'Height Difference'", "Plug for ABC Show", 
+     "'Will be eliminated'", "Score of 4 or below", "'I've never danced before'", "'Point your toes'", "Crying",
+     "Too much cleavage", "Dancer rips off shirt", "FREE", "Bruno rips off shirt", "Illegal Lift",
+     "Karianne gets too emotional", "Judge reports wrong score", "'Cha-Cha-Cha'", "Judge demon-strates move", "Frustrated Pro",
+     "Star seems to give up", "A 'proper' dance", "Sequin Dress", "Embarr-asing Outfit", "Dance-Off!" ]
+
+
+document.getElementById("squareColor0").innerHTML=itemList[0];
+document.getElementById("squareColor1").innerHTML=itemList[1];
+document.getElementById("squareColor2").innerHTML=itemList[2];
+document.getElementById("squareColor3").innerHTML=itemList[3];
+document.getElementById("squareColor4").innerHTML=itemList[4];
+document.getElementById("squareColor5").innerHTML=itemList[5];
+document.getElementById("squareColor6").innerHTML=itemList[6];
+document.getElementById("squareColor7").innerHTML=itemList[7];
+document.getElementById("squareColor8").innerHTML=itemList[8];
+document.getElementById("squareColor9").innerHTML=itemList[9];
+document.getElementById("squareColor10").innerHTML=itemList[10];
+document.getElementById("squareColor11").innerHTML=itemList[11];
+document.getElementById("squareColor12").innerHTML=itemList[12];
+document.getElementById("squareColor13").innerHTML=itemList[13];
+document.getElementById("squareColor14").innerHTML=itemList[14];
+document.getElementById("squareColor15").innerHTML=itemList[15];
+document.getElementById("squareColor16").innerHTML=itemList[16];
+document.getElementById("squareColor17").innerHTML=itemList[17];
+document.getElementById("squareColor18").innerHTML=itemList[18];
+document.getElementById("squareColor19").innerHTML=itemList[19];
+document.getElementById("squareColor20").innerHTML=itemList[20];
+document.getElementById("squareColor21").innerHTML=itemList[21];
+document.getElementById("squareColor22").innerHTML=itemList[22];
+document.getElementById("squareColor23").innerHTML=itemList[23];
+document.getElementById("squareColor24").innerHTML=itemList[24];
+
+// ColorIndex will hold the color code of the words
+// At first it will be reset to black (undetermined)
+// The other codes are:
+//   gray = unused
+//   yellow = used but in wrong location
+//   green = letter is in exact location
+let colorIndex = [ 0,0,0,0,0,   0,0,0,0,0,   0,0,0,0,0,  0,0,0,0,0, 0,0,0,0,0 ];
+
+function reset_colorIndex() {
+  for (let ii = 0; ii < colorIndex.length; ii++) {
+    colorIndex[ii] = 0;
+  }
+}
+
+function colorChoose(myColor) {
+  var colors = ["white","yellow","gray"];
+  if (colorIndex[myColor] >= colors.length-1) {
+    colorIndex[myColor] = 1;
+  } else {
+    colorIndex[myColor] = (colorIndex[myColor] + 1);
+  }
+  myID = "squareColor" + myColor;
+  document.getElementById(myID).style.backgroundColor = colors[colorIndex[myColor]];
+}
+
+function getEntry(num) {
+  // Seems like a concatenation of the entry number (i.e. "eentry" + num) does not work.
+  // So I am doing it explicity.
+  var corr = document.getElementsByName("eentry" + num);
+  var myCorr = "";
+  myCorr = corr[0].value;
+  return myCorr;
+}
+
+function summup(val) {
+  // Sum up the colorIndex entries in the VAL word
+  var total = 0;
+  for (let mm = 0; mm < 5; mm++) {
+    total = total + colorIndex[val*4+mm];
+  }
+  return total;
+}
+
+function setCharAt(str,index,chr){
+  if(index > str.length-1) return str;
+  return str.substring(0,index) + chr + str.substring(index+1);
+}
+
+</script>
+
+<button class="cb"
+    onclick='document.getElementById("my_entries").innerHTML = getEntry(1) + "  " + getEntry(2) + "  " + getEntry(3) + " " + getEntry(4);
+             document.getElementById("my_words"  ).innerHTML = getMatchList();'
+  >Update</button>
+<button class="cb"
+    onclick='reset_colorIndex();location.reload()'
+  >Reset</button>
+
+<p></p>
+<p></p>
+<p>Good Luck!</p>
+
+</div><!-- container -->
+</body>
+</html>

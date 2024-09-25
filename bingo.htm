@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <!--
     BINGO
-    Type in the letters from your puzzle in the appropriate areas and hit UPDATE.
-    This code will give you possible 5-letter words which match your criteria.
+    Select the event that you are interested and push 'update'.
+    Then click on the events as they occur to highlight them.
+    Five in a row makes a Bingo!
 
     Written by  : tuubesox
     Pathname    : https://tuubesox.github.io/wordle_solver/wordle_solver.htm
     Created     : 09/15/2024
-    Last Update : 09/17/2024
+    Last Update : 09/24/2024
 -->
 <html lang="en">
 <head>
@@ -100,7 +101,7 @@
             </td>
             <td>
                 <h1 id="h1-greater">Bingo<br>
-                <span id="h1-lesser">Click on items when they occur</span></h1>
+                <span id="h1-lesser">Select an event, then push update. Click on items when they occur</span></h1>
             </td>
         </tr>
     </table>
@@ -112,6 +113,14 @@
 <!-- **************************************************************************
                ***  HERE IS WHERE IT GETS INTERESTING  ***
      ************************************************************************** -->
+<p></p>
+
+<select name="Show" id="lala">
+  <option value="Null" default>Select an Event</option>
+  <option value=0>Election Debate</option>
+  <option value=1>Bachelor(ette)</option>
+  <option value=2>Dancing with the Stars</option>
+</select>
 
 <p></p>
 
@@ -180,54 +189,61 @@
 <p></p>
 <script>
 
-var debateList = [ "World War III", "Some say the best ever", "Crowd size", "Project 2025",
+var itemList = [    // 0   Debate
+      [ "World War III", "Some say the best ever", "Crowd size", "Project 2025",
      "Election Denial", "Twice Impeached", "Insurrection", "Putin's Puppet", "Hunter Biden",
-     "I'm Speaking", "Not Going Back", "FREE", "Weird", "Sleepy Joe", "Eye Roll", "Border Czar",
+     "I'm Speaking", "Not Going Back", "Weird", "Sleepy Joe", "Eye Roll", "Border Czar",
      "Childless Cat Lady", "Convicted Felon", "Kamala mispronounced", "Radical Left",
-     "Witch Hunt", "Shrinking Middle Class", "Ultra MAGA", "Stolen Election" ]
+     "Witch Hunt", "Shrinking Middle Class", "Ultra MAGA", "Stolen Election" ],
 
-
-var bachList = [ "Absolutely", "Here for wrong reasons", "My person", "Not here to make friends", 
-     "Disrespect", "Fantasy Suites", "Home-towns", "I'm here for ...", 
+     // 1  Bachelor
+     [ "Absolutely", "Here for wrong reasons", "My person", "Not here to make friends",
+     "Disrespect", "Fantasy Suites", "Home-towns", "I'm here for ...",
      "Injury on group date", "It's the final rose tonight", "Can I steal you away?",
-     "One-on-one date", "FREE", "I want the best for ...", "Chemistry", "Bags taken away",
+     "One-on-one date", "I want the best for ...", "Chemistry", "Bags taken away",
      "Vulner-able", "Kiss", "Will you accept this rose?", "Cham-pagne toast", "My future (spouse)",
-     "Bug/animal disruption", "Crying", "Seated at dinner with no food", "Love journey" ]
+     "Bug/animal disruption", "Crying", "Seated at dinner with no food", "Love journey" ],
 
-// Like, 
-
-var itemList = [ "Has Injury", "Gets Covid", "'Fantastic'", "'Height Difference'", "Plug for ABC Show", 
+     // 2  DWTS
+     [ "Has Injury", "Gets Covid", "'Fantastic'", "'Height Difference'", "Plug for ABC Show",
      "'Will be eliminated'", "Score of 4 or below", "'I've never danced before'", "'Point your toes'", "Crying",
-     "Too much cleavage", "Dancer rips off shirt", "FREE", "Bruno rips off shirt", "Illegal Lift",
+     "Too much cleavage", "Dancer rips off shirt", "Bruno rips off shirt", "Illegal Lift",
      "Karianne gets too emotional", "Judge reports wrong score", "'Cha-Cha-Cha'", "Judge demon-strates move", "Frustrated Pro",
      "Star seems to give up", "A 'proper' dance", "Sequin Dress", "Embarr-asing Outfit", "Dance-Off!" ]
+   ]
 
+function jumbleIt() {
+  myNum = document.getElementById("lala").value
 
-document.getElementById("squareColor0").innerHTML=itemList[0];
-document.getElementById("squareColor1").innerHTML=itemList[1];
-document.getElementById("squareColor2").innerHTML=itemList[2];
-document.getElementById("squareColor3").innerHTML=itemList[3];
-document.getElementById("squareColor4").innerHTML=itemList[4];
-document.getElementById("squareColor5").innerHTML=itemList[5];
-document.getElementById("squareColor6").innerHTML=itemList[6];
-document.getElementById("squareColor7").innerHTML=itemList[7];
-document.getElementById("squareColor8").innerHTML=itemList[8];
-document.getElementById("squareColor9").innerHTML=itemList[9];
-document.getElementById("squareColor10").innerHTML=itemList[10];
-document.getElementById("squareColor11").innerHTML=itemList[11];
-document.getElementById("squareColor12").innerHTML=itemList[12];
-document.getElementById("squareColor13").innerHTML=itemList[13];
-document.getElementById("squareColor14").innerHTML=itemList[14];
-document.getElementById("squareColor15").innerHTML=itemList[15];
-document.getElementById("squareColor16").innerHTML=itemList[16];
-document.getElementById("squareColor17").innerHTML=itemList[17];
-document.getElementById("squareColor18").innerHTML=itemList[18];
-document.getElementById("squareColor19").innerHTML=itemList[19];
-document.getElementById("squareColor20").innerHTML=itemList[20];
-document.getElementById("squareColor21").innerHTML=itemList[21];
-document.getElementById("squareColor22").innerHTML=itemList[22];
-document.getElementById("squareColor23").innerHTML=itemList[23];
-document.getElementById("squareColor24").innerHTML=itemList[24];
+  myList = itemList[myNum];
+  shuffle(myList);
+  document.getElementById("squareColor0").innerHTML=myList[0];
+  document.getElementById("squareColor1").innerHTML=myList[1];
+  document.getElementById("squareColor2").innerHTML=myList[2];
+  document.getElementById("squareColor3").innerHTML=myList[3];
+  document.getElementById("squareColor4").innerHTML=myList[4];
+  document.getElementById("squareColor5").innerHTML=myList[5];
+  document.getElementById("squareColor6").innerHTML=myList[6];
+  document.getElementById("squareColor7").innerHTML=myList[7];
+  document.getElementById("squareColor8").innerHTML=myList[8];
+  document.getElementById("squareColor9").innerHTML=myList[9];
+  document.getElementById("squareColor10").innerHTML=myList[10];
+  document.getElementById("squareColor11").innerHTML=myList[11];
+  document.getElementById("squareColor12").innerHTML="FREE";
+  document.getElementById("squareColor13").innerHTML=myList[12];  // Shifted
+  document.getElementById("squareColor14").innerHTML=myList[13];
+  document.getElementById("squareColor15").innerHTML=myList[14];
+  document.getElementById("squareColor16").innerHTML=myList[15];
+  document.getElementById("squareColor17").innerHTML=myList[16];
+  document.getElementById("squareColor18").innerHTML=myList[17];
+  document.getElementById("squareColor19").innerHTML=myList[18];
+  document.getElementById("squareColor20").innerHTML=myList[19];
+  document.getElementById("squareColor21").innerHTML=myList[20];
+  document.getElementById("squareColor22").innerHTML=myList[21];
+  document.getElementById("squareColor23").innerHTML=myList[22];
+  document.getElementById("squareColor24").innerHTML=myList[23];
+}
+
 
 // ColorIndex will hold the color code of the words
 // At first it will be reset to black (undetermined)
@@ -244,7 +260,8 @@ function reset_colorIndex() {
 }
 
 function colorChoose(myColor) {
-  var colors = ["white","yellow","gray"];
+  // var colors = ["white","yellow","gray"];
+  var colors = ["white","yellow","#e5e5e5"];
   if (colorIndex[myColor] >= colors.length-1) {
     colorIndex[myColor] = 1;
   } else {
@@ -277,11 +294,26 @@ function setCharAt(str,index,chr){
   return str.substring(0,index) + chr + str.substring(index+1);
 }
 
+function shuffle(array) {
+  let currentIndex = array.length;
+
+  // While there remain elements to shuffle...
+  while (currentIndex != 0) {
+
+    // Pick a remaining element...
+    let randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+}
+
 </script>
 
 <button class="cb"
-    onclick='document.getElementById("my_entries").innerHTML = getEntry(1) + "  " + getEntry(2) + "  " + getEntry(3) + " " + getEntry(4);
-             document.getElementById("my_words"  ).innerHTML = getMatchList();'
+    onclick='jumbleIt();'
   >Update</button>
 <button class="cb"
     onclick='reset_colorIndex();location.reload()'
